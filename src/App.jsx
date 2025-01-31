@@ -80,14 +80,15 @@ function Game() {
   const moves = history.map((squares, move) => {
     let description
     if (move > 0) {
-      description = `Go to move #${move}`
+      const pos = history[move - 1].findIndex((elm, i) => elm !== squares[i])
+      description = `Go to move #${move} (${Math.floor(pos / 3)}, ${pos % 3}})`
     } else {
       description = 'Go to game start'
     }
     return (
       <li key={move}>
         { move === history.length - 1 ? (
-          <div>You are at move #{ move }</div>
+          <div>You are at move #{move}</div>
         ) : (
           <button onClick={() => jumpTo(move)}>{description}</button>
         )}
